@@ -1,5 +1,7 @@
 package com.insurance.claimmanagementservice.claimserviceimpl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,14 @@ public class ClaimServiceImpl implements ClaimService {
 	public Claim saveClaimInformation(Claim claim) {
 		
 		return repository.save(claim);
+		
+	}
+	public List<Claim> getAllClaim() {
+		
+		List<Claim> claim =repository.findAll();
+		
+		return claim;
+
 	}
 
 	
