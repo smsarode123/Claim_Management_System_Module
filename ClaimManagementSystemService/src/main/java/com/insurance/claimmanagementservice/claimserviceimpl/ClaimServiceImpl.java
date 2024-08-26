@@ -6,16 +6,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.insurance.claimmanagementservice.exception.InvalidClaimIdException;
+
 import com.insurance.claimmanagementservice.model.Claim;
 import com.insurance.claimmanagementservice.repository.ClaimRepository;
 import com.insurance.claimmanagementservice.service.ClaimService;
 
 @Service
 public class ClaimServiceImpl implements ClaimService {
-	
-	@Autowired private ClaimRepository repository;
+
+	@Autowired
+	private ClaimRepository repository;
 
 	@Override
+
 	public Claim getSingleClaimService(int claimId) {
 		Optional<Claim> claim = repository.findById(claimId);
 
@@ -25,9 +28,13 @@ public class ClaimServiceImpl implements ClaimService {
 		} else {
 			throw new InvalidClaimIdException("Customer id " + claimId + " is not valid");
 		}
-	
-		
+
 	}
 
+	@Override
+	public Claim saveClaimInformation(Claim claim) {
+
+		return repository.save(claim);
+	}
 
 }
