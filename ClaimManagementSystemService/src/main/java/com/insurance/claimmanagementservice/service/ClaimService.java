@@ -15,6 +15,7 @@ public interface ClaimService {
 
 	void deleteClaimByClaimId(int claimId);
 
+
 	Incident_Details saveIncidentDetails(Incident_Details incident_Details);
 
 	List<Incident_Details> getAllIncident_Details();
@@ -25,6 +26,9 @@ public interface ClaimService {
 
 	Incident_Details getSingleIncident_Details(int incidentId);
 
+
+
+	Claim updateClaim(Claim claim, int claimId);
 
 
 }
