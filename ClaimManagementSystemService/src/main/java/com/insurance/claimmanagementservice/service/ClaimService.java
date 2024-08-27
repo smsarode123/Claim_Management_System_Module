@@ -12,4 +12,6 @@ public interface ClaimService {
 
 	List<Claim> getAllClaim();
 
+	void deleteClaimByClaimId(int claimId);
+
 }
