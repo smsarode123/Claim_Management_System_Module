@@ -13,6 +13,7 @@ import com.insurance.claimmanagementservice.model.Claim;
 import com.insurance.claimmanagementservice.repository.ClaimRepository;
 import com.insurance.claimmanagementservice.service.ClaimService;
 
+
 @Service
 public class ClaimServiceImpl implements ClaimService {
 
@@ -46,6 +47,19 @@ public class ClaimServiceImpl implements ClaimService {
 
 		return claim;
 
+	}
+
+	@Override
+	public void deleteClaimByClaimId(int claimId) {
+		Optional<Claim> claimRef = repository.findById(claimId);
+
+		if (claimRef.isPresent()) {
+			repository.deleteById(claimId);
+		} else {
+			throw new InvalidClaimIdException("Customer id " + claimId + " is not valid");
+
+		}
+		
 	}
 
 }
