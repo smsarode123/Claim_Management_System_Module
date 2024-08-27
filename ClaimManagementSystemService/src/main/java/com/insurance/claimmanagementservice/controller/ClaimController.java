@@ -46,5 +46,7 @@ public class ClaimController {
 		return new ResponseEntity<List<Claim>>(claim, HttpStatus.FOUND);
 
 	}
+	
+	
 
 }
