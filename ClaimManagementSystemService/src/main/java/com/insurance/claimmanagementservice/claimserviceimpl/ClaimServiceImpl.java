@@ -62,4 +62,16 @@ public class ClaimServiceImpl implements ClaimService {
 		
 	}
 
+	@Override
+	public Claim updateClaim(Claim claim, int claimId) {
+	 Optional<Claim> claimRef=repository.findById(claimId);
+	 
+	 if(claimRef.isPresent()) {
+		 return repository.save(claim);
+	 }
+	 else {
+		  throw new InvalidClaimIdException(" Claim Id" + claimId + " is not valid");
+	 }
+	}
+
 }

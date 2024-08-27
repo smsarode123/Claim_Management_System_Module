@@ -14,4 +14,6 @@ public interface ClaimService {
 
 	void deleteClaimByClaimId(int claimId);
 
+	Claim updateClaim(Claim claim, int claimId);
+
 }
