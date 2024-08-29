@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import com.insurance.claimmanagementservice.dto.ErrorResponse;
 import com.insurance.claimmanagementservice.exception.InvalidClaimIdException;
 import com.insurance.claimmanagementservice.exception.InvalidIncidentIdException;
+import com.insurance.claimmanagementservice.exception.InvalidClaimAssessmentIdException;
+
 @ControllerAdvice
 public class ClaimIdHandler {
 
@@ -28,4 +30,12 @@ public class ClaimIdHandler {
 		
 		return new ResponseEntity<ErrorResponse>(response, HttpStatus.NOT_FOUND);
 	}
+	 
+	 @ExceptionHandler(InvalidClaimAssessmentIdException.class)
+	 public ResponseEntity<ErrorResponse> InvalidClaimAssessmentIdException(InvalidClaimAssessmentIdException inException) {
+			
+			ErrorResponse response = new ErrorResponse(inException.getMessage(), inException.getClass().getName(), new Date(), 404);
+			
+			return new ResponseEntity<ErrorResponse>(response, HttpStatus.NOT_FOUND);
+		}
 }

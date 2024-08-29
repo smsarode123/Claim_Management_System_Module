@@ -5,13 +5,17 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
+import org.springframework.stereotype.Service;
+
+
+import com.insurance.claimmanagementservice.exception.InvalidClaimAssessmentIdException;
 import com.insurance.claimmanagementservice.exception.InvalidClaimIdException;
 import com.insurance.claimmanagementservice.exception.InvalidIncidentIdException;
 import com.insurance.claimmanagementservice.model.Claim;
+import com.insurance.claimmanagementservice.model.ClaimAssessment;
 import com.insurance.claimmanagementservice.model.Incident_Details;
+import com.insurance.claimmanagementservice.repository.ClaimAssessmentRepository;
 import com.insurance.claimmanagementservice.repository.ClaimRepository;
 import com.insurance.claimmanagementservice.repository.Incident_DetailsRepository;
 import com.insurance.claimmanagementservice.service.ClaimService;
@@ -25,6 +29,9 @@ public class ClaimServiceImpl implements ClaimService {
 	
 	@Autowired
 	private Incident_DetailsRepository inRepository;
+	
+	@Autowired
+	private ClaimAssessmentRepository claimAssessmentRepository;
 
 	@Override
 
@@ -102,9 +109,20 @@ public class ClaimServiceImpl implements ClaimService {
 
 	@Override
 	public void deleteIncident_Details(int incidentId) {
-	
-		inRepository.findById(incidentId);
+       Optional<Incident_Details> incident_Details = inRepository.findById(incidentId);
 		
+		if(incident_Details.isPresent()) {
+			
+			inRepository.deleteById(incidentId);
+		}
+		
+		
+		
+		else {
+			
+			throw new InvalidIncidentIdException("Incident Id:- " + incidentId + "  Is Not Present For Delete Operation");
+		  }
+
 	}
 
 	@Override
@@ -123,6 +141,69 @@ public class ClaimServiceImpl implements ClaimService {
 			
 			throw new InvalidIncidentIdException("Incident Id:- " + incidentId + "  Is Not Present For Update Operation");
 		  }
+	}
+
+	@Override
+	public ClaimAssessment saveClaimAssessment(ClaimAssessment claimAssessment) {
+		
+		return claimAssessmentRepository.save(claimAssessment);
+	}
+
+	@Override
+	public List<ClaimAssessment> getAllClaimAssessment() {
+		
+		return claimAssessmentRepository.findAll();
+	}
+
+	@Override
+	public ClaimAssessment getSingleClaimAssessment(int claimId) {
+		
+		Optional<ClaimAssessment> claimAssessment = claimAssessmentRepository.findById(claimId);
+		
+		if(claimAssessment.isPresent()) {
+			
+			return claimAssessment.get();
+		}
+		
+		else {
+			
+			throw new InvalidClaimAssessmentIdException("Incident Id:- " + claimId + "  Is Not Present ");
+		}
+	
+		
+		
+	}
+
+	@Override
+	public ClaimAssessment updateClaimAssessment(int claimId, ClaimAssessment clAssessment) {
+		
+		Optional<ClaimAssessment> claimAssessment = claimAssessmentRepository.findById(claimId);
+		
+		if(claimAssessment.isPresent()) {
+			
+		clAssessment.setClaimId(claimId);
+		
+		return claimAssessmentRepository.save(clAssessment);
+		}
+		else {
+			throw new InvalidClaimAssessmentIdException("Incident Id:- " + claimId + "  Is Not Present For Update Operation");
+		}
+	}
+
+	@Override
+	public void deleteClaimAssessment(int claimId) {
+		
+		Optional<ClaimAssessment> claimAssessment = claimAssessmentRepository.findById(claimId);
+		 if(claimAssessment.isPresent()) {
+			 
+			 claimAssessmentRepository.deleteById(claimId);
+			 
+			 
+		 }else {
+			
+			 throw new InvalidClaimAssessmentIdException("Incident Id:- " + claimId + "  Is Not Present For Delete Operation");
+		}
+		
 	}
 
 	

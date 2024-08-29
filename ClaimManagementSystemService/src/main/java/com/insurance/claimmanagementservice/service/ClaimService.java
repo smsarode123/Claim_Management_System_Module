@@ -3,6 +3,7 @@ package com.insurance.claimmanagementservice.service;
 import java.util.List;
 
 import com.insurance.claimmanagementservice.model.Claim;
+import com.insurance.claimmanagementservice.model.ClaimAssessment;
 import com.insurance.claimmanagementservice.model.Incident_Details;
 
 public interface ClaimService {
@@ -24,6 +25,16 @@ public interface ClaimService {
 	void deleteIncident_Details(int incidentId);
 
 	Incident_Details getSingleIncident_Details(int incidentId);
+
+	ClaimAssessment saveClaimAssessment(ClaimAssessment claimAssessment);
+
+	List<ClaimAssessment> getAllClaimAssessment();
+
+	ClaimAssessment getSingleClaimAssessment(int claimId);
+
+	ClaimAssessment updateClaimAssessment(int claimId, ClaimAssessment clAssessment);
+
+	void deleteClaimAssessment(int claimId);
 
 
 
