@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -52,5 +53,12 @@ public class ClaimController {
 		service.deleteClaimByClaimId(claimId);
 		return new ResponseEntity<String>(HttpStatus.GONE);
 	}
-
+	
+	@PutMapping("updateClaim/{claimId}")
+	public ResponseEntity<Claim> updateCalaim(@PathVariable("claimId") int claimId, @RequestBody Claim claim)
+	{
+		Claim claimRef =service.updateClaim(claim,claimId);
+		return new ResponseEntity<Claim>(claimRef, HttpStatus.OK);
+		
+	}
 }
