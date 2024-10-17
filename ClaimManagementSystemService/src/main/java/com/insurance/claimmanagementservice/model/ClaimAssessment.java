@@ -2,10 +2,12 @@ package com.insurance.claimmanagementservice.model;
 
 import java.util.Date;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,4 +23,6 @@ public class ClaimAssessment {
 	private int claimId;
 	private float claimAmount;
 	private Date claimDate;
+	@OneToOne(cascade = CascadeType.ALL)
+	private Incident_Details indidetail;
 }

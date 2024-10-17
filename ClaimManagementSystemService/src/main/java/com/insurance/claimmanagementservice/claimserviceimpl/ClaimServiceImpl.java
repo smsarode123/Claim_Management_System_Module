@@ -1,5 +1,6 @@
 package com.insurance.claimmanagementservice.claimserviceimpl;
 
+import java.io.IOException;
 import java.util.List;
 
 import java.util.Optional;
@@ -7,8 +8,11 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
-
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.insurance.claimmanagementservice.exception.InvalidClaimAssessmentIdException;
 import com.insurance.claimmanagementservice.exception.InvalidClaimIdException;
 import com.insurance.claimmanagementservice.exception.InvalidIncidentIdException;
@@ -47,12 +51,7 @@ public class ClaimServiceImpl implements ClaimService {
 
 	}
 
-	@Override
-	public Claim saveClaimInformation(Claim claim) {
-
-		return repository.save(claim);
-
-	}
+	
 
 	public List<Claim> getAllClaim() {
 
@@ -219,6 +218,34 @@ public class ClaimServiceImpl implements ClaimService {
 	 else {
 		  throw new InvalidClaimIdException(" Claim Id" + claimId + " is not valid");
 	 }
+	}
+
+	@Override
+	public Claim saveClaimInformation(String claim, MultipartFile incidentphoto) {
+		
+		
+		ObjectMapper mapper=new ObjectMapper();
+		
+		 
+		Claim claimdata=new Claim();
+		
+		try {
+			claimdata=mapper.readValue(claim, Claim.class);
+			
+		    claimdata.setIncidentImage(incidentphoto.getBytes());
+			
+		} catch (JsonMappingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return repository.save(claimdata);
 	}
 
 
