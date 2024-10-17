@@ -2,6 +2,8 @@ package com.insurance.claimmanagementservice.service;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.insurance.claimmanagementservice.model.Claim;
 import com.insurance.claimmanagementservice.model.ClaimAssessment;
 import com.insurance.claimmanagementservice.model.Incident_Details;
@@ -10,7 +12,7 @@ public interface ClaimService {
 
 	Claim getSingleClaimService(int claimId);
 
-	Claim saveClaimInformation(Claim claim);
+	
 
 	List<Claim> getAllClaim();
 
@@ -40,6 +42,8 @@ public interface ClaimService {
 
 
 	Claim updateClaim(Claim claim, int claimId);
+
+	Claim saveClaimInformation(String claim, MultipartFile incidentphoto);
 
 
 }

@@ -12,8 +12,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.insurance.claimmanagementservice.model.Claim;
 import com.insurance.claimmanagementservice.service.ClaimService;
@@ -30,10 +31,10 @@ public class ClaimController {
 		return new ResponseEntity<Claim>(claim, HttpStatus.OK);
 
 	}
-
+ 
 	@PostMapping("/saveClaimInformation")
-	public ResponseEntity<Claim> saveClaimInformation(@RequestBody Claim claim) {
-		Claim claimRef = service.saveClaimInformation(claim);
+	public ResponseEntity<Claim> saveClaimInformation(@RequestPart ("data") String claim,@RequestPart ("incidentphoto") MultipartFile incidentphoto  ) {
+		Claim claimRef = service.saveClaimInformation(claim,incidentphoto);
 
 		return new ResponseEntity<Claim>(claimRef, HttpStatus.CREATED);
 
