@@ -46,11 +46,12 @@ public class ClaimController {
 		return new ResponseEntity<List<Claim>>(claim, HttpStatus.FOUND);
 
 	}
-    @DeleteMapping("/deleteclaimById/{claimId}")
-    	public ResponseEntity<String> deleteClaimBycliamId(@PathVariable("claimId")int claimId){
-    	
-    	service.deleteClaimByClaimId(claimId);
-    	return new ResponseEntity<String>(HttpStatus.GONE);
-    }
+
+	@DeleteMapping("/deleteclaimById/{claimId}")
+	public ResponseEntity<String> deleteClaimBycliamId(@PathVariable("claimId") int claimId) {
+
+		service.deleteClaimByClaimId(claimId);
+		return new ResponseEntity<String>(HttpStatus.GONE);
+	}
 
 }
