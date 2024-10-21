@@ -17,9 +17,9 @@ public class ClaimIdHandler {
 
 	 @ExceptionHandler(InvalidClaimIdException.class)
 	public ResponseEntity<ErrorResponse> handlerInvalidId(InvalidClaimIdException claim) {
-		
+
 		ErrorResponse response = new ErrorResponse(claim.getMessage(), claim.getClass().getName(), new Date(), 404);
-		
+
 		return new ResponseEntity<ErrorResponse>(response, HttpStatus.NOT_FOUND);
 	}
 
