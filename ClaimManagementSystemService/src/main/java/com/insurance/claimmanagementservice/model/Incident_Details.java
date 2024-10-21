@@ -21,6 +21,4 @@ public class Incident_Details {
 	private int incidentId;
 	private String incidentLocation;
 	private long incidentInvolvePersons;
-	@OneToOne(cascade = CascadeType.ALL)
-	private ClaimAssessment claimassessment;
-}
+	}

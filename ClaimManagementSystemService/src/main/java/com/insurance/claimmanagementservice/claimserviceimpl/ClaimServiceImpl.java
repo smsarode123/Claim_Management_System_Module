@@ -227,7 +227,7 @@ public class ClaimServiceImpl implements ClaimService {
 		ObjectMapper mapper=new ObjectMapper();
 		
 		 
-		Claim claimdata=new Claim();
+		Claim claimdata=null;
 		
 		try {
 			claimdata=mapper.readValue(claim, Claim.class);
@@ -244,8 +244,9 @@ public class ClaimServiceImpl implements ClaimService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		if(claimdata!=null)
 		return repository.save(claimdata);
+		else return null;
 	}
 
 

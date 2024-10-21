@@ -22,25 +22,26 @@ import lombok.NoArgsConstructor;
 @Entity
 public class Claim {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int claimId;
-	private String claimentName;
-	private long claimentContactNumber;
-	private String policyNumber;
-	private String claimType;
-	private String claimStatus;
-	private Date claimDate;
-	private Date dateOfIncident;
-	private Date dateOfClaimClosure;
-	@Lob
-	@Column(length = 999999999)
-	private byte [] incidentImage;
-	
-    @OneToOne(cascade = CascadeType.ALL)
-	private Incident_Details incident;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int claimId;
     
-    @OneToMany(cascade = CascadeType.ALL) 
-	private List<ClaimAssessment> claimassessment;
-	
+    private String claimantName;  // Corrected spelling
+    private long claimantContactNumber;  // Corrected spelling
+    private String policyNumber;
+    private String claimType;
+    private String claimStatus;
+    private Date claimDate;
+    private Date dateOfIncident;
+    private Date dateOfClaimClosure;
+    
+    @Lob
+    @Column(length = 999999999)
+    private byte[] incidentImage;
+    
+    @OneToOne(cascade = CascadeType.ALL)
+    private Incident_Details incident;
+    
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<ClaimAssessment> claimAssessments;  
 }

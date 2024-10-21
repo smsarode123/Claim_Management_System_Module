@@ -21,8 +21,6 @@ public class ClaimAssessment {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int claimId;
-	private float claimAmount;
+	private long claimAmount;
 	private Date claimDate;
-	@OneToOne(cascade = CascadeType.ALL)
-	private Incident_Details indidetail;
-}
+	}
